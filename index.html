@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Internet and Web Fundamentals university assignment covering core web concepts.">
+    <title>Internet &amp; Web Fundamentals</title>
+    <style>
+        :root {
+            --ink: #26364a;
+            --muted: #5e7186;
+            --slate: #2f506f;
+            --blue: #477ea5;
+            --sky: #eaf4f8;
+            --cream: #fffaf0;
+            --paper: #ffffff;
+            --line: #d7e3e8;
+            --accent: #d87854;
+            --shadow: 0 12px 30px rgba(39, 67, 88, 0.11);
+        }
+
+        * { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0;
+            color: var(--ink);
+            background: linear-gradient(135deg, #edf7f7 0%, var(--cream) 52%, #eef2f8 100%);
+            font-family: "Segoe UI", Tahoma, sans-serif;
+            line-height: 1.7;
+        }
+
+        a {
+            color: #1c668d;
+            text-decoration: underline;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 3px;
+        }
+
+        a:hover, a:focus { color: var(--accent); }
+
+        .page-shell {
+            width: min(1120px, calc(100% - 32px));
+            margin: 0 auto;
+        }
+
+        header {
+            margin: 28px 0 22px;
+            padding: clamp(30px, 6vw, 64px);
+            color: #fff;
+            background: linear-gradient(120deg, #294763, var(--slate) 58%, #4c7894);
+            border-radius: 18px;
+            box-shadow: var(--shadow);
+        }
+
+        .eyebrow {
+            margin: 0 0 8px;
+            color: #bfe2e4;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        h1, h2, h3 { line-height: 1.2; }
+        h1 { max-width: 760px; margin: 0; font-size: clamp(2.2rem, 5vw, 4.3rem); }
+        header p { max-width: 680px; margin: 18px 0 0; color: #e3f0f2; font-size: 1.08rem; }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: minmax(230px, 0.75fr) minmax(0, 2fr);
+            gap: 24px;
+            align-items: start;
+        }
+
+        .panel, .topic {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .panel { padding: 24px; }
+        .panel h2 { margin-top: 0; color: var(--slate); font-size: 1.35rem; }
+        .toc { margin: 0; padding-left: 25px; }
+        .toc li { margin: 6px 0; }
+        .toc a { font-size: 0.94rem; }
+
+        .diagram {
+            width: 100%;
+            height: auto;
+            margin-top: 22px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: var(--sky);
+        }
+
+        main { min-width: 0; }
+        .intro { margin: 0 0 18px; color: var(--muted); }
+        .topic { margin-bottom: 18px; padding: 26px 28px; scroll-margin-top: 20px; overflow: hidden; }
+        .topic h2 { margin: 0 0 10px; color: var(--slate); font-size: 1.55rem; }
+        .topic h3 { margin: 18px 0 7px; color: var(--blue); font-size: 1.05rem; }
+        .topic p { margin: 8px 0; }
+        .topic ul { margin: 8px 0 0; padding-left: 24px; }
+        .topic li { margin: 4px 0; }
+        .topic-visual { float: right; width: 190px; height: 120px; margin: 0 0 14px 24px; border: 1px solid var(--line); border-radius: 10px; background: var(--sky); object-fit: cover; box-shadow: 0 6px 16px rgba(39, 67, 88, 0.08); }
+        .flowchart { display: flex; align-items: center; justify-content: center; gap: 10px; clear: both; margin: 20px 0 6px; padding: 18px; background: var(--sky); border: 1px solid var(--line); border-radius: 10px; }
+        .flow-step { min-width: 110px; padding: 12px 10px; color: #fff; background: var(--slate); border-radius: 8px; text-align: center; font-weight: 700; }
+        .flow-arrow { color: var(--accent); font-size: 1.5rem; font-weight: 700; }
+        .flow-step small { display: block; color: #d8ecee; font-weight: 400; }
+        .topic code { padding: 2px 6px; color: #8d452d; background: #fff0e9; border-radius: 4px; }
+        pre {
+            overflow-x: auto;
+            margin: 14px 0 4px;
+            padding: 14px 16px;
+            color: #eff8f7;
+            background: #243746;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        pre.example { border-left: 5px solid var(--accent); }
+        pre.example::before { display: block; margin-bottom: 6px; color: #bfe2e4; content: "Example"; font-family: "Segoe UI", Tahoma, sans-serif; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+
+        @media (max-width: 760px) {
+            .page-shell { width: min(100% - 20px, 620px); }
+            .content-grid { grid-template-columns: 1fr; }
+            .panel { position: static; }
+            .topic { padding: 22px 20px; }
+            .topic-visual { float: none; display: block; width: 100%; height: 150px; margin: 0 0 16px; }
+            .flowchart { flex-wrap: wrap; }
+            .flow-arrow { transform: rotate(90deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-shell">
+        <!-- Assignment header -->
+        <header>
+            <p class="eyebrow">University Assignment</p>
+            <h1>Internet &amp; Web Fundamentals</h1>
+            <p>A structured guide to the technologies, standards, and concepts that make the modern web possible.</p>
+        </header>
+
+        <div class="content-grid">
+            <!-- Table of contents -->
+            <aside class="panel" aria-label="Table of contents">
+                <h2>Table of Contents</h2>
+                <ol class="toc">
+                    <li><a href="#the-internet">The Internet</a></li>
+                    <li><a href="#the-web">The World Wide Web</a></li>
+                    <li><a href="#web-browsers">Web Browsers</a></li>
+                    <li><a href="#web-servers">Web Servers</a></li>
+                    <li><a href="#client-server">Client-Server Model</a></li>
+                    <li><a href="#websites">Websites and Web Pages</a></li>
+                    <li><a href="#url">URL</a></li>
+                    <li><a href="#domain-names">Domain Names</a></li>
+                    <li><a href="#dns">DNS</a></li>
+                    <li><a href="#ip-address">IP Address</a></li>
+                    <li><a href="#protocols">Protocols</a></li>
+                    <li><a href="#http">HTTP and HTTPS</a></li>
+                    <li><a href="#html">HTML</a></li>
+                    <li><a href="#css">CSS</a></li>
+                    <li><a href="#javascript">JavaScript</a></li>
+                    <li><a href="#responsive">Responsive Web Design</a></li>
+                    <li><a href="#accessibility">Web Accessibility</a></li>
+                    <li><a href="#search-engines">Search Engines</a></li>
+                    <li><a href="#web-hosting">Web Hosting</a></li>
+                    <li><a href="#cloud">Cloud Computing</a></li>
+                    <li><a href="#security">Web Security</a></li>
+                    <li><a href="#privacy">Privacy and Cookies</a></li>
+                    <li><a href="#email">Email on the Internet</a></li>
+                    <li><a href="#hyperlinks">Hyperlinks / Links</a></li>
+                </ol>
+
+                <!-- Self-contained URL structure diagram -->
+                <img class="diagram" alt="Diagram showing the parts of a URL" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 260'%3E%3Crect width='800' height='260' rx='18' fill='%23eaf4f8'/%3E%3Ctext x='40' y='70' font-family='Segoe UI, sans-serif' font-size='28' font-weight='700' fill='%232f506f'%3EURL structure%3C/text%3E%3Ctext x='40' y='130' font-family='monospace' font-size='25' fill='%2326374a'%3Ehttps://www.example.com/page%3C/text%3E%3Cpath d='M40 150h90M180 150h245M475 150h190' stroke='%23d87854' stroke-width='4'/%3E%3Ctext x='42' y='190' font-family='Segoe UI, sans-serif' font-size='18' fill='%235e7186'%3Escheme%3C/text%3E%3Ctext x='190' y='190' font-family='Segoe UI, sans-serif' font-size='18' fill='%235e7186'%3Edomain name%3C/text%3E%3Ctext x='480' y='190' font-family='Segoe UI, sans-serif' font-size='18' fill='%235e7186'%3Epath%3C/text%3E%3C/svg%3E">
+            </aside>
+
+            <main>
+                <p class="intro">These topics explain how information travels across networks and how developers create useful, accessible websites.</p>
+
+                <section class="topic" id="the-internet"><h2>1. The Internet</h2><img class="topic-visual" alt="Connected nodes representing the Internet" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 240'%3E%3Crect width='400' height='240' fill='%23eaf4f8'/%3E%3Cg stroke='%23477ea5' stroke-width='6'%3E%3Cpath d='M80 90L200 50 320 100 200 190 80 90'/%3E%3C/g%3E%3Cg fill='%23d87854'%3E%3Ccircle cx='80' cy='90' r='18'/%3E%3Ccircle cx='200' cy='50' r='18'/%3E%3Ccircle cx='320' cy='100' r='18'/%3E%3Ccircle cx='200' cy='190' r='18'/%3E%3C/g%3E%3C/svg%3E"><p>The Internet is a global network of interconnected computer networks that exchange data using common communication standards.</p><ul><li>It connects billions of devices worldwide.</li><li>It supports services such as the web, email, streaming, and file transfer.</li></ul><pre class="example"><code>Device A  -- Internet --  Device B</code></pre></section>
+                <section class="topic" id="the-web"><h2>2. The World Wide Web</h2><img class="topic-visual" alt="Linked web pages representing the World Wide Web" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 240'%3E%3Crect width='400' height='240' fill='%23eaf4f8'/%3E%3Cg fill='%23fff' stroke='%23477ea5' stroke-width='6'%3E%3Crect x='35' y='70' width='95' height='75' rx='8'/%3E%3Crect x='153' y='35' width='95' height='75' rx='8'/%3E%3Crect x='270' y='85' width='95' height='75' rx='8'/%3E%3C/g%3E%3Cg stroke='%23d87854' stroke-width='6'%3E%3Cpath d='M130 100l23-28M248 72l22 40'/%3E%3C/g%3E%3C/svg%3E"><p>The World Wide Web is an information system of linked resources accessed through the Internet using web browsers.</p><ul><li>Web resources are commonly identified by URLs.</li><li>Web pages use technologies such as HTML, CSS, and JavaScript.</li></ul><pre class="example"><code>https://www.university.edu/courses</code></pre></section>
+                <section class="topic" id="web-browsers"><h2>3. Web Browsers</h2><img class="topic-visual" alt="Browser window representing web browsing" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 240'%3E%3Crect width='400' height='240' fill='%23eaf4f8'/%3E%3Crect x='35' y='40' width='330' height='160' rx='12' fill='%23fff' stroke='%232f506f' stroke-width='6'/%3E%3Cpath d='M35 78h330M85 120h230M85 145h150' stroke='%23477ea5' stroke-width='10'/%3E%3Cg fill='%23d87854'%3E%3Ccircle cx='62' cy='59' r='8'/%3E%3Ccircle cx='88' cy='59' r='8'/%3E%3C/g%3E%3C/svg%3E"><p>A web browser is application software that requests, interprets, and displays web resources.</p><ul><li>Examples include Chrome, Firefox, Edge, and Safari.</li><li>Browsers render HTML, apply CSS, and execute JavaScript.</li></ul><pre class="example"><code>Browser: Open URL -&gt; Render page</code></pre></section>
+                                <section class="topic" id="web-servers"><h2>4. Web Servers</h2><img class="topic-visual" alt="Server rack representing web hosting hardware" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 240'%3E%3Crect width='400' height='240' fill='%23eaf4f8'/%3E%3Cg fill='%232f506f'%3E%3Crect x='105' y='35' width='190' height='45' rx='7'/%3E%3Crect x='105' y='98' width='190' height='45' rx='7'/%3E%3Crect x='105' y='161' width='190' height='45' rx='7'/%3E%3C/g%3E%3Cg fill='%23d87854'%3E%3Ccircle cx='130' cy='57' r='8'/%3E%3Ccircle cx='130' cy='120' r='8'/%3E%3Ccircle cx='130' cy='183' r='8'/%3E%3C/g%3E%3C/svg%3E"><p>A web server stores website files and delivers them to clients in response to requests.</p><ul><li>It can serve static files or generate dynamic responses.</li><li>Common server software includes Apache, Nginx, and IIS.</li></ul><pre class="example"><code>server.get("/", (request, response) =&gt; {
+    response.send("Welcome!");
+});</code></pre></section>
+                <section class="topic" id="client-server"><h2>5. Client-Server Model</h2><img class="topic-visual" alt="Client and server communication" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 240'%3E%3Crect width='400' height='240' fill='%23eaf4f8'/%3E%3Crect x='25' y='80' width='100' height='75' rx='10' fill='%23fff' stroke='%23477ea5' stroke-width='6'/%3E%3Crect x='275' y='65' width='100' height='105' rx='10' fill='%232f506f'/%3E%3Cpath d='M130 105h140M270 135H130' stroke='%23d87854' stroke-width='7'/%3E%3C/svg%3E"><p>In this model, a client requests a service and a server processes the request and returns a response.</p><ul><li>The browser acts as the client.</li><li>The server may access databases, APIs, or application logic.</li></ul><div class="flowchart" aria-label="Client server flowchart"><div class="flow-step">Client<small>request</small></div><span class="flow-arrow">&#8594;</span><div class="flow-step">Server<small>process</small></div><span class="flow-arrow">&#8594;</span><div class="flow-step">Response<small>result</small></div></div><pre class="example"><code>GET /profile HTTP/1.1
+Host: university.edu</code></pre></section>
+                <section class="topic" id="websites"><h2>6. Websites and Web Pages</h2><img class="topic-visual" alt="Collection of web pages" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 240'%3E%3Crect width='400' height='240' fill='%23eaf4f8'/%3E%3Cg fill='%23fff' stroke='%23477ea5' stroke-width='5'%3E%3Crect x='70' y='50' width='190' height='130' rx='8'/%3E%3Crect x='140' y='75' width='190' height='130' rx='8'/%3E%3C/g%3E%3Cpath d='M105 95h100M105 120h70M175 125h100M175 150h70' stroke='%23d87854' stroke-width='9'/%3E%3C/svg%3E"><p>A website is a collection of related web pages under a common domain. A web page is one document within that collection.</p><ul><li>Pages may be static or dynamically generated.</li><li>Navigation connects related pages for visitors.</li></ul><pre class="example"><code>website/
+  index.html
+  about.html
+  contact.html</code></pre></section>
+                <section class="topic" id="url"><h2>7. URL</h2><img class="topic-visual" alt="URL address structure" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 240'%3E%3Crect width='400' height='240' fill='%23eaf4f8'/%3E%3Ctext x='35' y='100' font-family='monospace' font-size='21' fill='%232f506f'%3Ehttps://site.com/page%3C/text%3E%3Cpath d='M35 125h75M125 125h145M285 125h80' stroke='%23d87854' stroke-width='5'/%3E%3C/svg%3E"><p>A Uniform Resource Locator identifies the location and access method of a resource on a network.</p><ul><li>It may contain a scheme, domain, path, query, and fragment.</li><li>Example: <code>https://www.example.com/about</code></li></ul><div class="flowchart" aria-label="URL structure flowchart"><div class="flow-step">Scheme<small>https</small></div><span class="flow-arrow">+</span><div class="flow-step">Domain<small>site.com</small></div><span class="flow-arrow">+</span><div class="flow-step">Path<small>/page</small></div></div><pre class="example"><code>https://example.com/search?q=web</code></pre></section>
+                <section class="topic" id="domain-names"><h2>8. Domain Names</h2><img class="topic-visual" alt="Readable domain name label" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 240'%3E%3Crect width='400' height='240' fill='%23eaf4f8'/%3E%3Cpath d='M90 115h220' stroke='%23477ea5' stroke-width='9'/%3E%3Ccircle cx='90' cy='115' r='35' fill='%23d87854'/%3E%3Ccircle cx='310' cy='115' r='35' fill='%232f506f'/%3E%3C/svg%3E"><p>A domain name is a readable address used to identify a website instead of requiring users to remember an IP address.</p><ul><li><strong>example.com</strong> contains a name and a top-level domain.</li><li>Domains are registered through domain registrars.</li></ul></section>
+                <section class="topic" id="dns"><h2>9. DNS</h2><img class="topic-visual" alt="DNS lookup between a browser and an IP address" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 240'%3E%3Crect width='400' height='240' fill='%23eaf4f8'/%3E%3Cg fill='%23fff' stroke='%23477ea5' stroke-width='5'%3E%3Crect x='25' y='80' width='90' height='70' rx='9'/%3E%3Crect x='155' y='55' width='90' height='120' rx='9'/%3E%3Crect x='285' y='80' width='90' height='70' rx='9'/%3E%3C/g%3E%3Cpath d='M115 115h40M245 115h40' stroke='%23d87854' stroke-width='7'/%3E%3C/svg%3E"><p>The Domain Name System translates human-readable domain names into IP addresses.</p><ul><li>DNS works like a distributed directory for the Internet.</li><li>It allows a domain to change servers without changing its public name.</li></ul><div class="flowchart" aria-label="DNS resolution flowchart"><div class="flow-step">Browser<small>site.com</small></div><span class="flow-arrow">&#8594;</span><div class="flow-step">DNS resolver<small>find IP</small></div><span class="flow-arrow">&#8594;</span><div class="flow-step">Web server<small>address</small></div></div></section>
+                <section class="topic" id="ip-address"><h2>10. IP Address</h2><img class="topic-visual" alt="IP address connected to network nodes" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 240'%3E%3Crect width='400' height='240' fill='%23eaf4f8'/%3E%3Ccircle cx='200' cy='110' r='55' fill='%232f506f'/%3E%3Ctext x='156' y='120' font-family='monospace' font-size='20' fill='%23fff'%3E192.0.2%3C/text%3E%3Cg fill='%23d87854'%3E%3Ccircle cx='75' cy='55' r='18'/%3E%3Ccircle cx='325' cy='55' r='18'/%3E%3Ccircle cx='75' cy='180' r='18'/%3E%3Ccircle cx='325' cy='180' r='18'/%3E%3C/g%3E%3C/svg%3E"><p>An Internet Protocol address identifies a device or network interface so data can be delivered to the correct destination.</p><ul><li>IPv4 uses 32-bit addresses, while IPv6 uses 128-bit addresses.</li><li>Addresses may be public or private.</li></ul></section>
+                <section class="topic" id="protocols"><h2>11. Protocols</h2><img class="topic-visual" alt="Layered communication protocols" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 240'%3E%3Crect width='400' height='240' fill='%23eaf4f8'/%3E%3Cg stroke='%23fff' stroke-width='3'%3E%3Crect x='70' y='35' width='260' height='42' rx='6' fill='%232f506f'/%3E%3Crect x='70' y='88' width='260' height='42' rx='6' fill='%23477ea5'/%3E%3Crect x='70' y='141' width='260' height='42' rx='6' fill='%23d87854'/%3E%3C/g%3E%3C/svg%3E"><p>Protocols are agreed rules that define how devices format, transmit, and receive data.</p><ul><li>They ensure that different hardware and software can communicate.</li><li>Examples include TCP/IP, HTTP, FTP, and SMTP.</li></ul></section>
+                <section class="topic" id="http"><h2>12. HTTP and HTTPS</h2><img class="topic-visual" alt="HTTP request and response exchange" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 240'%3E%3Crect width='400' height='240' fill='%23eaf4f8'/%3E%3Crect x='25' y='80' width='100' height='75' rx='10' fill='%23fff' stroke='%23477ea5' stroke-width='6'/%3E%3Crect x='275' y='65' width='100' height='105' rx='10' fill='%232f506f'/%3E%3Cpath d='M130 105h140M270 135H130' stroke='%23d87854' stroke-width='7'/%3E%3C/svg%3E"><p>HTTP transfers web resources between clients and servers. HTTPS adds encryption through TLS.</p><ul><li>HTTPS protects data from being read or changed in transit.</li><li>A secure page normally begins with <code>https://</code>.</li></ul><div class="flowchart" aria-label="HTTP request response flowchart"><div class="flow-step">Request<small>GET /page</small></div><span class="flow-arrow">&#8594;</span><div class="flow-step">Server<small>status 200</small></div><span class="flow-arrow">&#8594;</span><div class="flow-step">Response<small>HTML</small></div></div><pre><code>GET /index.html HTTP/1.1
+Host: example.com</code></pre></section>
+                <section class="topic" id="html"><h2>13. HTML</h2><img class="topic-visual" alt="HTML document structure illustration" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 240'%3E%3Crect width='400' height='240' fill='%23eaf4f8'/%3E%3Cpath d='M110 35l-55 85 55 85M290 35l55 85-55 85M235 25l-70 190' fill='none' stroke='%23d87854' stroke-width='12'/%3E%3Ctext x='142' y='125' font-family='sans-serif' font-size='28' fill='%232f506f'%3EHTML%3C/text%3E%3C/svg%3E"><p>HyperText Markup Language provides the structure and meaning of web content.</p><ul><li>Semantic elements describe purpose, such as <code>&lt;header&gt;</code>, <code>&lt;main&gt;</code>, and <code>&lt;footer&gt;</code>.</li><li>HTML can contain text, images, forms, lists, and links.</li></ul></section>
+                <section class="topic" id="css"><h2>14. CSS</h2><img class="topic-visual" alt="CSS styling palette illustration" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 240'%3E%3Crect width='400' height='240' fill='%23eaf4f8'/%3E%3Cpath d='M200 35l105 45v65l-105 60-105-60V80z' fill='%23477ea5'/%3E%3Cpath d='M200 60l75 32v38l-75 43-75-43V92z' fill='%23fff'/%3E%3Cpath d='M150 115h100M170 90v50M230 90v50' stroke='%23d87854' stroke-width='8'/%3E%3C/svg%3E"><p>Cascading Style Sheets control the visual presentation and layout of HTML documents.</p><ul><li>CSS manages colors, spacing, typography, and responsive layouts.</li><li>Rules consist of selectors and declarations.</li></ul></section>
+                <section class="topic" id="javascript"><h2>15. JavaScript</h2><img class="topic-visual" alt="JavaScript code and interaction illustration" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 240'%3E%3Crect width='400' height='240' fill='%232f506f'/%3E%3Ctext x='48' y='92' font-family='monospace' font-size='30' fill='%23eaf4f8'%3E%26lt;script%26gt;%3C/text%3E%3Cpath d='M55 135h220M55 165h150' stroke='%23d87854' stroke-width='9'/%3E%3C/svg%3E"><p>JavaScript is a programming language used to add behavior and interactivity to web pages.</p><ul><li>It can respond to events and update the Document Object Model.</li><li>It can communicate with servers using APIs.</li></ul></section>
+                <section class="topic" id="responsive"><h2>16. Responsive Web Design</h2><img class="topic-visual" alt="Responsive design across desktop and mobile devices" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 240'%3E%3Crect width='400' height='240' fill='%23eaf4f8'/%3E%3Crect x='45' y='45' width='210' height='140' rx='9' fill='%23fff' stroke='%23477ea5' stroke-width='7'/%3E%3Crect x='280' y='90' width='70' height='110' rx='12' fill='%232f506f'/%3E%3Cpath d='M75 80h150M75 110h100M295 120h40M295 145h40' stroke='%23d87854' stroke-width='9'/%3E%3C/svg%3E"><p>Responsive design makes a website adapt to different screen sizes, orientations, and input methods.</p><ul><li>Flexible layouts, relative units, and media queries are commonly used.</li><li>Content should remain readable on mobile devices.</li></ul></section>
+                <section class="topic" id="accessibility"><h2>17. Web Accessibility</h2><img class="topic-visual" alt="Accessibility symbol representing inclusive design" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 240'%3E%3Crect width='400' height='240' fill='%23eaf4f8'/%3E%3Ccircle cx='200' cy='55' r='25' fill='%23d87854'/%3E%3Cpath d='M125 95h150M200 95v65M200 120l-55 65M200 120l55 65' stroke='%232f506f' stroke-width='14' stroke-linecap='round'/%3E%3C/svg%3E"><p>Accessibility means designing websites that people with different abilities can use effectively.</p><ul><li>Use semantic HTML, keyboard-friendly controls, and meaningful alternative text.</li><li>Provide sufficient color contrast and clear focus states.</li></ul></section>
+                <section class="topic" id="search-engines"><h2>18. Search Engines</h2><img class="topic-visual" alt="Magnifying glass representing search engines" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 240'%3E%3Crect width='400' height='240' fill='%23eaf4f8'/%3E%3Ccircle cx='175' cy='100' r='58' fill='%23fff' stroke='%23477ea5' stroke-width='12'/%3E%3Cpath d='M220 145l70 60' stroke='%23d87854' stroke-width='18' stroke-linecap='round'/%3E%3Cpath d='M145 100h60' stroke='%232f506f' stroke-width='8'/%3E%3C/svg%3E"><p>Search engines discover, index, and rank web pages so users can find relevant information.</p><ul><li>Crawlers follow links to discover content.</li><li>Descriptive titles and useful content help search visibility.</li></ul></section>
+                <section class="topic" id="web-hosting"><h2>19. Web Hosting</h2><img class="topic-visual" alt="Web hosting data center servers" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 240'%3E%3Crect width='400' height='240' fill='%23eaf4f8'/%3E%3Cg fill='%232f506f'%3E%3Crect x='95' y='35' width='210' height='44' rx='7'/%3E%3Crect x='95' y='95' width='210' height='44' rx='7'/%3E%3Crect x='95' y='155' width='210' height='44' rx='7'/%3E%3C/g%3E%3Cg fill='%23d87854'%3E%3Ccircle cx='125' cy='57' r='8'/%3E%3Ccircle cx='125' cy='117' r='8'/%3E%3Ccircle cx='125' cy='177' r='8'/%3E%3C/g%3E%3C/svg%3E"><p>Web hosting provides storage, connectivity, and server resources needed to publish a website online.</p><ul><li>Hosting plans may be shared, virtual private, dedicated, or cloud-based.</li><li>Important features include uptime, storage, bandwidth, and backups.</li></ul></section>
+                <section class="topic" id="cloud"><h2>20. Cloud Computing</h2><img class="topic-visual" alt="Cloud computing services illustration" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 240'%3E%3Crect width='400' height='240' fill='%23eaf4f8'/%3E%3Cpath d='M110 160h190a45 45 0 0 0 0-90 65 65 0 0 0-125-10 50 50 0 0 0-65 48 52 52 0 0 0 0 52z' fill='%23477ea5'/%3E%3Cg fill='%23d87854'%3E%3Ccircle cx='145' cy='125' r='10'/%3E%3Ccircle cx='200' cy='125' r='10'/%3E%3Ccircle cx='255' cy='125' r='10'/%3E%3C/g%3E%3C/svg%3E"><p>Cloud computing delivers computing resources such as storage, servers, and software over a network on demand.</p><ul><li>It can scale resources as traffic changes.</li><li>Users often pay for the resources they consume.</li></ul></section>
+                <section class="topic" id="security"><h2>21. Web Security</h2><img class="topic-visual" alt="Shield representing web security" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 240'%3E%3Crect width='400' height='240' fill='%23eaf4f8'/%3E%3Cpath d='M200 35l100 35v65c0 55-45 80-100 100-55-20-100-45-100-100V70z' fill='%232f506f'/%3E%3Cpath d='M150 125l35 35 70-75' fill='none' stroke='%23d87854' stroke-width='15' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"><p>Web security protects websites, users, and data from unauthorized access and malicious activity.</p><ul><li>Use strong authentication, secure updates, validation, and HTTPS.</li><li>Common threats include phishing, malware, injection, and cross-site scripting.</li></ul></section>
+                <section class="topic" id="privacy"><h2>22. Privacy and Cookies</h2><img class="topic-visual" alt="Cookie and privacy settings illustration" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 240'%3E%3Crect width='400' height='240' fill='%23eaf4f8'/%3E%3Cpath d='M205 55a65 65 0 1 0 65 65 32 32 0 0 1-65-65z' fill='%23d87854'/%3E%3Cg fill='%232f506f'%3E%3Ccircle cx='165' cy='105' r='7'/%3E%3Ccircle cx='205' cy='150' r='7'/%3E%3Ccircle cx='150' cy='145' r='7'/%3E%3C/g%3E%3C/svg%3E"><p>Privacy concerns how websites collect, use, store, and share personal information. Cookies are small data values stored by a browser.</p><ul><li>Cookies can remember preferences or support analytics and sessions.</li><li>Websites should explain data practices and request consent where required.</li></ul></section>
+                <section class="topic" id="email"><h2>23. Email on the Internet</h2><img class="topic-visual" alt="Envelope representing email" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 240'%3E%3Crect width='400' height='240' fill='%23eaf4f8'/%3E%3Crect x='65' y='65' width='270' height='130' rx='12' fill='%23fff' stroke='%23477ea5' stroke-width='7'/%3E%3Cpath d='M70 75l130 90L330 75' fill='none' stroke='%23d87854' stroke-width='10'/%3E%3C/svg%3E"><p>Email is a digital messaging service that sends information between mail servers and user mail clients.</p><ul><li>SMTP is used for sending mail, while IMAP and POP3 support receiving it.</li><li>Attachments allow files to be shared with a message.</li></ul></section>
+                <section class="topic" id="hyperlinks"><h2>24. Hyperlinks / Links</h2><img class="topic-visual" alt="Chain links representing hyperlinks" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 240'%3E%3Crect width='400' height='240' fill='%23eaf4f8'/%3E%3Cg fill='none' stroke-width='20'%3E%3Crect x='50' y='90' width='155' height='65' rx='32' stroke='%23477ea5' transform='rotate(-25 125 122)'/%3E%3Crect x='195' y='85' width='155' height='65' rx='32' stroke='%23d87854' transform='rotate(-25 275 117)'/%3E%3C/g%3E%3C/svg%3E"><p>A hyperlink connects one resource to another and is activated by selecting linked text, an image, or another element.</p><ul><li>The HTML <code>&lt;a&gt;</code> element creates links.</li><li>Links may point to another page, a section on the same page, an email address, or a downloadable file.</li></ul><p><em>Example:</em> <code>&lt;a href="#the-internet"&gt;Return to The Internet&lt;/a&gt;</code></p></section>
+            </main>
+        </div>
+
+    </div>
+    <script>
+        // Add one concise code example to every topic card.
+        const topicExamples = {
+            "the-internet": "Device A  -- Internet --  Device B",
+            "the-web": "https://www.university.edu/courses",
+            "web-browsers": "Browser: Open URL -> Render page",
+            "web-servers": "server.get(\"/\", (request, response) => {\n  response.send(\"Welcome!\");\n});",
+            "client-server": "GET /profile HTTP/1.1\nHost: university.edu",
+            "websites": "website/\n  index.html\n  about.html\n  contact.html",
+            "url": "https://example.com/search?q=web",
+            "domain-names": "subdomain.example.edu.pk",
+            "dns": "nslookup example.com\nAddress: 93.184.216.34",
+            "ip-address": "IPv4: 192.168.1.10\nIPv6: 2001:db8::1",
+            "protocols": "Application: HTTP\nTransport: TCP\nNetwork: IP",
+            "http": "GET /index.html HTTP/1.1\nHost: example.com",
+            "html": "<article>\n  <h2>Web Fundamentals</h2>\n</article>",
+            "css": ".topic {\n  color: #2f506f;\n}",
+            "javascript": "document.querySelector(\"button\").addEventListener(\"click\", showMessage);",
+            "responsive": "@media (max-width: 760px) {\n  .layout { display: block; }\n}",
+            "accessibility": "<img src=\"diagram.png\" alt=\"URL structure diagram\">",
+            "search-engines": "<title>Internet & Web Fundamentals</title>",
+            "web-hosting": "public_html/\n  index.html",
+            "cloud": "storage.upload(\"assignment.pdf\");",
+            "security": "password = hash(password);\nuse HTTPS for transport",
+            "privacy": "document.cookie = \"theme=light; Secure\";",
+            "email": "From: student@university.edu\nTo: teacher@university.edu",
+            "hyperlinks": "<a href=\"#the-internet\">The Internet</a>"
+        };
+
+        document.querySelectorAll(".topic").forEach((topic) => {
+            if (topic.querySelector("pre.example")) return;
+            const example = document.createElement("pre");
+            example.className = "example";
+            const code = document.createElement("code");
+            code.textContent = topicExamples[topic.id];
+            example.append(code);
+            topic.append(example);
+        });
+    </script>
+</body>
+</html>
